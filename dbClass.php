@@ -9,10 +9,10 @@ error_reporting(E_ALL);
 if ( !class_exists( 'DB' ) ) {
     class DB {
         public function __construct( // database bilgileri
-        		$user='database_user', // burayı değiştir
-        		$password='database_password', // burayı değiştir
-        		$database='database_name', // burayı değiştir
-        		$host = 'localhost:3306' // burayı değiştir
+        $user='database_user', // burayı değiştir
+        $password='database_password', // burayı değiştir
+        $database='database_name', // burayı değiştir
+        $host = 'localhost:3306' // burayı değiştir
         ) {$this->user = $user; $this->password = $password; $this->database = $database; $this->host = $host; date_default_timezone_set('Europe/Istanbul'); // buraya dokunma!
         }
         protected function connect() { // database bağlantı.
