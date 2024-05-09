@@ -26,12 +26,14 @@ if ( !class_exists( 'DB' ) ) {
                 $results[] = $row;
             }
             return $results;
+            mysqli_close($db);
         }
         public function insert($query) { // veri oluşturma - düzenleme
             $db = $this->connect();
             $db->set_charset("utf8mb4");
             $result = $db->query($query);
             return $result;
+            mysqli_close($db);
         }
     }
 $db = new DB(); //Db yi oluşturma
