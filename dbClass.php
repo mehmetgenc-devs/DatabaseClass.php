@@ -27,7 +27,7 @@ if ( !class_exists( 'DB' ) ) {
             }
             return $results;
         }
-        public function insert($query) { // veri oluşturma
+        public function insert($query) { // veri oluşturma - düzenleme
             $db = $this->connect();
             $db->set_charset("utf8mb4");
             $result = $db->query($query);
