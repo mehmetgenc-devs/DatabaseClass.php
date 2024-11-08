@@ -33,7 +33,7 @@ if ( !class_exists( 'DB' ) ) {
                 $db->close();
             }
         }
-        public function insert($query) { // veri oluşturma - düzenleme
+        public function q($query) { // veri oluşturma - düzenleme
             try {
                 $db = $this->connect();
                 $db->set_charset("utf8mb4");
