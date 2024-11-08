@@ -19,21 +19,31 @@ if ( !class_exists( 'DB' ) ) {
             return new mysqli($this->host, $this->user, $this->password, $this->database); // buraya dokunma!
         }
         public function query($query) { // veri çekme
-            $db = $this->connect();
-            $db->set_charset("utf8mb4");
-            $result = $db->query($query);
-            while ( $row = $result->fetch_array(MYSQLI_ASSOC) ) {
-                $results[] = $row;
+            try {
+                $db = $this->connect();
+                $db->set_charset("utf8mb4");
+                $result = $db->query($query);
+                while ( $row = $result->fetch_array(MYSQLI_ASSOC) ) {
+                    $results[] = $row;
+                }
+                return $results;
+            } catch (\Exception $e) {
+                echo $e->getMessage();
+            } finally {
+                $db->close();
             }
-            return $results;
-            mysqli_close($db);
         }
         public function insert($query) { // veri oluşturma - düzenleme
-            $db = $this->connect();
-            $db->set_charset("utf8mb4");
-            $result = $db->query($query);
-            return $result;
-            mysqli_close($db);
+            try {
+                $db = $this->connect();
+                $db->set_charset("utf8mb4");
+                $result = $db->query($query);
+                return $result;
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            } finally {
+                $db->close();
+            }
         }
     }
 $db = new DB(); //Db yi oluşturma
