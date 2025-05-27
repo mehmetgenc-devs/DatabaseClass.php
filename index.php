@@ -65,6 +65,16 @@ if ( !class_exists( 'DB' ) ) {
                 $db->close();
             }
         }
+        public function delete($table, $where) {
+            try {
+                $q = "DELETE FROM `" . $table . "` WHERE " . $where;
+                return $this->q($q);
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            } finally {
+                $db->close();
+            }
+        }
         public function q($query) { // veri düzenleme - ekleme
             try {
                 $db = $this->connect();
