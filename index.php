@@ -33,7 +33,39 @@ if ( !class_exists( 'DB' ) ) {
                 $db->close();
             }
         }
-        public function q($query) { // veri oluşturma - düzenleme
+        public function insert($table, $array)
+        {
+            try {
+                 $q = "INSERT INTO `" . $table . "` ";
+                $q .= "(`" . implode("`, `", array_keys($array)) . "`) VALUES (";
+                foreach ($array as $value) {
+                    $q .= "'" . $this->escape($value) . "', ";
+                }
+                $q = rtrim($q, ', ') . ")";
+                $id = $this->q($q);
+                return $id;
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            } finally {
+                $db->close();
+            }
+        }
+        public function update($table, $data, $where) {
+            try {
+                 $q = "UPDATE `" . $table . "` SET ";
+                foreach ($data as $key => $value) {
+                    $q .= "`" . $key . "` = '" . $this->escape($value) . "', ";
+                }
+                $q = rtrim($q, ', ');
+                $q .= " WHERE " . $where;
+                return $this->q($q);
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            } finally {
+                $db->close();
+            }
+        }
+        public function q($query) { // veri düzenleme - ekleme
             try {
                 $db = $this->connect();
                 $db->set_charset("utf8mb4");
