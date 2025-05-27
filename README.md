@@ -42,5 +42,8 @@ $guncelle = [
 ];
 $db->update('users', $guncelle, "id = 1");
 
-// Özel sorgu örneği
+// DELETE örneği
 $db->delete('users', 'id = 1');
+
+// özel sorgu örneği
+$db->q("UPDATE users SET id = 2 WHERE id = 1");
